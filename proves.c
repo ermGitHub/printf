@@ -6,7 +6,7 @@
 /*   By: enramire <enramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 10:44:31 by enramire          #+#    #+#             */
-/*   Updated: 2022/12/14 12:16:51 by enramire         ###   ########.fr       */
+/*   Updated: 2022/12/26 19:48:46 by enramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,35 +58,29 @@ https://manpages.ubuntu.com/manpages/trusty/es/man3/stdarg.3.html
 #include <stdio.h>
 #include <stdarg.h>
 
-size_t	ft_strlen(const char *s)
-//FUNCION DE FTLIB.H
+int addnumbers(int n, ...)
 {
+	printf("N value: %i\n", n);
+	int	sum;
 	int	i;
 
+	sum = 0;
 	i = 0;
-	while (s[i] != '\0')
+	va_list ptr;
+	va_start(ptr, n);
+	while (i <= n)
 	{
+		sum += va_arg(ptr, int);
+		printf("Check point: %i\n", i);
 		i++;
 	}
-	return (i);
-}
-
-int	ft_printf(char const *, ...)
-{
-	printf("%p", *);
-	return 0;
+	va_end(ptr);
+	return sum;
 }
 
 int	main(void)
 {
-	char	cr;
-	char	*str;
-
-	cr = 'a';
-	str = "Hola";
-	printf("lo siguiente es lo que imprime printf original:\n");;
-	printf("%c\n", cr);
-	printf(" %%\n");
-	printf("Longitud: %zu\n", ft_strlen(str));
-	ft_printf(str);
+	printf("Variadic functions:\n");
+	printf("\nSum %i + %i + %i = %i\n", 1, 2, 4, addnumbers(1, 2, 4));
+	return (0);
 }
