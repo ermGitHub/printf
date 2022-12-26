@@ -6,7 +6,7 @@
 /*   By: enramire <enramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:16:50 by enramire          #+#    #+#             */
-/*   Updated: 2022/12/11 19:03:37 by enramire         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:36:25 by enramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,3 +19,5 @@
 # include <stdarg.h>
 
 int ft_printf(char const *, ...);
+
+#endif
