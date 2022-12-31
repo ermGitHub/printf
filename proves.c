@@ -6,7 +6,7 @@
 /*   By: enramire <enramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 10:44:31 by enramire          #+#    #+#             */
-/*   Updated: 2022/12/26 19:48:46 by enramire         ###   ########.fr       */
+/*   Updated: 2022/12/31 18:08:26 by enramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ https://manpages.ubuntu.com/manpages/trusty/es/man3/stdarg.3.html
 
 
 
-*/
-
 #include <stdio.h>
 #include <stdarg.h>
 
@@ -68,11 +66,10 @@ int addnumbers(int n, ...)
 	i = 0;
 	va_list ptr;
 	va_start(ptr, n);
-	while (i <= n)
+	for (i = 0; i < n; i++)
 	{
 		sum += va_arg(ptr, int);
 		printf("Check point: %i\n", i);
-		i++;
 	}
 	va_end(ptr);
 	return sum;
@@ -81,6 +78,79 @@ int addnumbers(int n, ...)
 int	main(void)
 {
 	printf("Variadic functions:\n");
-	printf("\nSum %i + %i + %i = %i\n", 1, 2, 4, addnumbers(1, 2, 4));
+	printf("\nSum %i + %i + %i + %i = %i\n", 1, 2, 4, 6, addnumbers(1, 2, 4, 6));
 	return (0);
+}
+*/
+
+#include <stdarg.h>
+#include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stddef.h>
+
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+int ft_printf (char const *str,...)
+{
+	int		count;
+	int		i;
+	int		value_arg;
+	va_list	ap;
+
+	count = 0;
+	i = 0;
+	count = ft_strlen(str);
+	value_arg = 0;
+	va_start (ap, str);
+	while (i < count)
+	{
+		ft_putchar_fd(str[i], 1);
+		i++;
+	}
+	printf("\n");
+	while (i < count)
+	{
+		if (str[i] == '%')
+		{
+			value_arg = va_arg (ap, int);
+			printf("\nNext argument: %i\n", value_arg);
+		}
+		i++;
+	}
+
+  	//va_start (ap, count);         /* Initialize the argument list. */
+	//for (i = 0; i < count; i++)
+    //sum += va_arg (ap, int);    /* Get the next argument value. */
+	//i++;
+	//va_end (ap);                  /* Clean up. */
+  return count;
+}
+
+int
+main (void)
+{
+  /* This call prints 16. */
+  printf ("\n%d\n", ft_printf ("hola que tal estas %", 1));
+
+  /* This call prints 55. */
+  //printf ("%d\n", add_em_up (10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+  return 0;
 }
