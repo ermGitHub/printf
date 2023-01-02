@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proves.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enramire <enramire@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kaneda <kaneda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 10:44:31 by enramire          #+#    #+#             */
-/*   Updated: 2022/12/31 18:08:26 by enramire         ###   ########.fr       */
+/*   Updated: 2023/01/02 11:41:24 by kaneda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,48 +109,56 @@ void	ft_putchar_fd(char c, int fd)
 
 int ft_printf (char const *str,...)
 {
-	int		count;
 	int		i;
 	int		value_arg;
 	va_list	ap;
 
-	count = 0;
 	i = 0;
-	count = ft_strlen(str);
 	value_arg = 0;
 	va_start (ap, str);
-	while (i < count)
-	{
-		ft_putchar_fd(str[i], 1);
-		i++;
-	}
-	printf("\n");
-	while (i < count)
+	i = 0;
+	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
 		{
-			value_arg = va_arg (ap, int);
-			printf("\nNext argument: %i\n", value_arg);
+			if (str[i + 1] == '%')
+			{
+				i++;
+				ft_putchar_fd(str[i], 1);
+			}
+			else
+			{
+				if (str[i + 1] == 'c')
+				{
+					value_arg = va_arg (ap, int);
+					ft_putchar_fd(value_arg, 1);
+					i++;
+				}
+				else
+				{
+					value_arg = va_arg (ap, int);
+					printf("\nNext argument default: %i\n", value_arg);
+				}
+			}
+		}
+		else
+		{
+			ft_putchar_fd(str[i], 1);
 		}
 		i++;
 	}
-
-  	//va_start (ap, count);         /* Initialize the argument list. */
-	//for (i = 0; i < count; i++)
-    //sum += va_arg (ap, int);    /* Get the next argument value. */
-	//i++;
-	//va_end (ap);                  /* Clean up. */
-  return count;
+	va_end (ap);
+	return i;
 }
 
 int
 main (void)
 {
-  /* This call prints 16. */
-  printf ("\n%d\n", ft_printf ("hola que tal estas %", 1));
+	char	prtc;
+	int		prti;
 
-  /* This call prints 55. */
-  //printf ("%d\n", add_em_up (10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-
-  return 0;
+	prtc = '5';
+	prti = 5;
+	printf ("\n%d\n", ft_printf ("0123456789%%, %%, %c, %, %.", prtc, prti, 0));
+	return 0;
 }
