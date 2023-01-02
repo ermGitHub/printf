@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proves.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaneda <kaneda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enramire <enramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 10:44:31 by enramire          #+#    #+#             */
-/*   Updated: 2023/01/02 11:41:24 by kaneda           ###   ########.fr       */
+/*   Updated: 2023/01/02 20:33:25 by enramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,72 @@ int	main(void)
 	printf("\nSum %i + %i + %i + %i = %i\n", 1, 2, 4, 6, addnumbers(1, 2, 4, 6));
 	return (0);
 }
+
+PRINTF V1.0
+
+int ft_printf (char const *str,...)
+{
+	int		i;
+	int		value_arg;
+	char	*val_arg;
+	va_list	ap;
+
+	i = 0;
+	value_arg = 0;
+	val_arg = 0;
+	va_start (ap, str);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '%')
+		{
+			if (str[i + 1] == '%')
+			{
+				i++;
+				ft_putchar_fd(str[i], 1);
+			}
+			else if (str[i + 1] == 'c')
+			{
+				value_arg = va_arg (ap, char);
+				printf("Value arg: %i\n", value_arg);
+				ft_putchar_fd(value_arg, 1);
+				i++;
+			}
+			else if (str[i + 1] == 's')
+			{
+				val_arg = va_arg (&ap, int);
+				ft_putstr_fd(val_arg, 1);
+			}
+			else
+			{
+					value_arg = va_arg (ap, int);
+					printf("\nNext argument default: %i\n", value_arg);
+			}
+		}
+		else
+		{
+			ft_putchar_fd(str[i], 1);
+		}
+		i++;
+	}
+	va_end (ap);
+	return i;
+}
+
+int
+main (void)
+{
+	char	prtc;
+	int		prti;
+	char	*prts;
+
+	prtc = '5';
+	prts = " hola ";
+	prti = 5;
+	printf ("\n%d\n", ft_printf ("0123456789%%, %%, %c, %s, %, %.", prtc, prts, prti, 0));
+	return 0;
+}
+
 */
 
 #include <stdarg.h>
@@ -107,10 +173,43 @@ void	ft_putchar_fd(char c, int fd)
 	write(fd, &c, 1);
 }
 
+void	ft_putstr_fd(char *s, int fd)
+{
+	int		i;
+
+	if (s != NULL)
+	{
+		i = 0;
+		while (s[i])
+		{
+			ft_putchar_fd(s[i], fd);
+			i++;
+		}
+	}
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	long int	nbr;
+
+	nbr = (long int)n;
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		nbr *= -1;
+	}
+	if (nbr > 9)
+		ft_putnbr_fd(nbr / 10, fd);
+	ft_putchar_fd((char)(nbr % 10 + '0'), fd);
+}
+
 int ft_printf (char const *str,...)
 {
 	int		i;
 	int		value_arg;
+	char	ch;
+	char	*string;
+	int		num;
 	va_list	ap;
 
 	i = 0;
@@ -126,19 +225,28 @@ int ft_printf (char const *str,...)
 				i++;
 				ft_putchar_fd(str[i], 1);
 			}
+			else if (str[i + 1] == 'c')
+			{
+				ch = va_arg (ap, int);
+				ft_putchar_fd(ch, 1);
+				i++;
+			}
+			else if (str[i + 1] == 's')
+			{
+				string = va_arg (ap, char *);
+				ft_putstr_fd(string, 1);
+				i++;
+			}
+			else if (str[i + 1] == 'i')
+			{
+				num = va_arg (ap, int);
+				ft_putnbr_fd(num, 1);
+				i++;
+			}
 			else
 			{
-				if (str[i + 1] == 'c')
-				{
-					value_arg = va_arg (ap, int);
-					ft_putchar_fd(value_arg, 1);
-					i++;
-				}
-				else
-				{
 					value_arg = va_arg (ap, int);
 					printf("\nNext argument default: %i\n", value_arg);
-				}
 			}
 		}
 		else
@@ -156,9 +264,11 @@ main (void)
 {
 	char	prtc;
 	int		prti;
+	char	*prts;
 
-	prtc = '5';
-	prti = 5;
-	printf ("\n%d\n", ft_printf ("0123456789%%, %%, %c, %, %.", prtc, prti, 0));
+	prtc = 'X';
+	prts = "hola";
+	prti = 5546;
+	printf ("\n%d\n", ft_printf ("0123456789%%, %%, %c, %s, %i, %.", prtc, prts, prti, 0));
 	return 0;
 }
