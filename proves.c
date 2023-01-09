@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proves.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enramire <enramire@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kaneda <kaneda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 10:44:31 by enramire          #+#    #+#             */
-/*   Updated: 2023/01/02 20:33:25 by enramire         ###   ########.fr       */
+/*   Updated: 2023/01/03 08:38:14 by kaneda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,8 +245,8 @@ int ft_printf (char const *str,...)
 			}
 			else
 			{
-					value_arg = va_arg (ap, int);
-					printf("\nNext argument default: %i\n", value_arg);
+				value_arg = va_arg (ap, int);
+				printf("\nNext argument default: %i\n", value_arg);
 			}
 		}
 		else
