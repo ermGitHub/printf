@@ -6,7 +6,7 @@
 /*   By: kaneda <kaneda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 10:44:31 by enramire          #+#    #+#             */
-/*   Updated: 2023/01/03 08:38:14 by kaneda           ###   ########.fr       */
+/*   Updated: 2023/01/09 15:38:19 by kaneda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,8 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putnbr_fd(nbr / 10, fd);
 	ft_putchar_fd((char)(nbr % 10 + '0'), fd);
 }
+
+int ft_int_to_octal(int num, )
 
 int ft_printf (char const *str,...)
 {
