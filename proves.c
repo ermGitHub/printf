@@ -6,7 +6,7 @@
 /*   By: kaneda <kaneda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 10:44:31 by enramire          #+#    #+#             */
-/*   Updated: 2023/01/09 15:38:19 by kaneda           ###   ########.fr       */
+/*   Updated: 2023/01/12 11:06:58 by kaneda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,28 @@ void	ft_putnbr_fd(int n, int fd)
 	ft_putchar_fd((char)(nbr % 10 + '0'), fd);
 }
 
-int ft_int_to_octal(int num, )
+int ft_int_to_octal(int num)
+{
+	int numoct[];
+	int i;
+	int x;
+
+	i = 0;
+	x = 0;
+	numoct = [100];
+	while (num != 0)
+	{
+		numoct[i] = num % 8;
+		num /= 8;
+		i++;
+	}
+	while (x <= i)
+	{
+		ft_putchar_fd(numoct[x] + '0', fd);
+		x++;
+	}
+	return (0);
+}
 
 int ft_printf (char const *str,...)
 {
