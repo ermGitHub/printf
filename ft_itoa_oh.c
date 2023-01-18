@@ -11,6 +11,33 @@ void	ft_putchar_fd(char c, int fd)
 	write(fd, &c, 1);
 }
 
+void	ft_putstr_fd(char *s, int fd)
+{
+	int		i;
+
+	if (s != NULL)
+	{
+		i = 0;
+		while (s[i])
+		{
+			ft_putchar_fd(s[i], fd);
+			i++;
+		}
+	}
+}
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+
 static int	ft_size(long int n, int size, int base)
 {
 	int	d;
@@ -72,11 +99,13 @@ static char	*ft_create_malloc(char *itoa, int neg, long int nbr, int size, int b
 	return (itoa);
 }
 
-char	*ft_itoa_oh(int n, int base)
+int	ft_itoa_oh(int n, int base)
 {
 	int			neg;
 	int			size;
 	char		*itoa;
+	char		*string;
+	int			lenght;
 	int			i;
 	long int	nbr;
 
@@ -84,6 +113,8 @@ char	*ft_itoa_oh(int n, int base)
 	size = 0;
 	i = 0;
 	itoa = NULL;
+	if (n == 0)
+		return (0);
 	if (n >= -2147483648 && n <= 2147483647)
 	{
 		nbr = (long int)n;
@@ -93,10 +124,13 @@ char	*ft_itoa_oh(int n, int base)
 			nbr = nbr * -1;
 			size++;
 		}
-		return (ft_create_malloc(itoa, neg, nbr, size, base));
+		string = (ft_create_malloc(itoa, neg, nbr, size, base));
+		ft_putstr_fd(string, 1);
+		lenght = ft_strlen(string);
+		return (lenght);
 	}
 	else
-		return (NULL);
+		return (0);
 }
 
 int main (void)
@@ -104,8 +138,8 @@ int main (void)
 	int	num_dec;
 	int	base;
 
-	num_dec = 785621;
-	base = 8;
-	printf("Resultado de ft_itoab: %s", ft_itoab(num_dec, base));
+	num_dec = 0;
+	base = 10;
+	printf("\nLa longitud es: %i\n", ft_itoa_oh(num_dec, base));
 	return (0);
 }

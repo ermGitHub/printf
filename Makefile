@@ -6,7 +6,7 @@
 #    By: enramire <enramire@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/11 17:57:02 by enramire          #+#    #+#              #
-#    Updated: 2022/12/26 19:28:05 by enramire         ###   ########.fr        #
+#    Updated: 2023/01/18 18:54:36 by enramire         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ SRC_LIBFT		= libft/ft_isalnum.c \
 				libft/ft_lstmap_bonus.c \
 
 SRCS			= ft_printf.c \
+				ft_itoa_oh.c \
 
 OBJS			= $(SRCS:.c=.o)
 OBJS_LIBFT		= $(SRC_LIBFT:.c=.o)

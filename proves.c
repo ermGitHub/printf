@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proves.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaneda <kaneda@student.42.fr>              +#+  +:+       +#+        */
+/*   By: enramire <enramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 10:44:31 by enramire          #+#    #+#             */
-/*   Updated: 2023/01/12 11:06:58 by kaneda           ###   ########.fr       */
+/*   Updated: 2023/01/18 19:29:23 by enramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,105 @@ main (void)
 # include <stdlib.h>
 # include <stddef.h>
 
+//#include "include/libftprintf.h"
+//#include "include/libft.h"
+
+//PRUEBAS DE CONVERSIONES DE INT A OCT HEX ETC...
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+static int	ft_size(long int n, int size, int base)
+{
+	int	d;
+	int	m;
+
+	d = 1;
+	m = 0;
+	while (d != 0)
+	{
+		d = (n / base);
+		m = (n % base);
+		n = n / base;
+		size++;
+	}
+	return (size);
+}
+
+static int	ft_fill_malloc(char *itoa, long int n, int size, int base)
+{
+	int		d;
+	int		m;
+	char	*hex_dic;
+
+	d = 1;
+	m = 0;
+	hex_dic = "0123456789ABCDEF";
+	while (d != 0)
+	{
+		d = (n / base);
+		m = (n % base);
+		if (base == 10 || base == 8)
+			itoa[size] = m + '0';
+		if (base == 16)
+			itoa[size] = hex_dic[m];
+		n = n / base;
+		size--;
+	}
+	return (size);
+}
+
+static char	*ft_create_malloc(char *itoa, int neg, long int nbr, int size, int base)
+{
+	if (base != 10 && base != 8 && base != 16)
+	{
+		printf("Error en la base.");
+		return (NULL);
+	}
+	size = ft_size(nbr, size, base);
+	itoa = malloc(sizeof (char) * size + 1);
+	if (!itoa)
+	{
+		printf("Error al creear el malloc.");
+		return (NULL);
+	}
+	if (neg)
+		itoa[0] = '-';
+	ft_fill_malloc(itoa, nbr, size - 1, base);
+	itoa[size] = '\0';
+	return (itoa);
+}
+
+char	*ft_itoa_oh(int n, int base)
+{
+	int			neg;
+	int			size;
+	char		*itoa;
+	int			i;
+	long int	nbr;
+
+	neg = 0;
+	size = 0;
+	i = 0;
+	itoa = NULL;
+	if (n >= -2147483648 && n <= 2147483647)
+	{
+		nbr = (long int)n;
+		if (n < 0)
+		{
+			neg = 1;
+			nbr = nbr * -1;
+			size++;
+		}
+		return (ft_create_malloc(itoa, neg, nbr, size, base));
+	}
+	else
+		return (NULL);
+}
+
+//PRUEBAS DE CONVERSIONES DE INT A OCT HEX ETC...
 
 size_t	ft_strlen(const char *s)
 {
@@ -168,10 +267,10 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
+//void	ft_putchar_fd(char c, int fd)
+//{
+//	write(fd, &c, 1);
+//}
 
 void	ft_putstr_fd(char *s, int fd)
 {
@@ -203,29 +302,6 @@ void	ft_putnbr_fd(int n, int fd)
 	ft_putchar_fd((char)(nbr % 10 + '0'), fd);
 }
 
-int ft_int_to_octal(int num)
-{
-	int numoct[];
-	int i;
-	int x;
-
-	i = 0;
-	x = 0;
-	numoct = [100];
-	while (num != 0)
-	{
-		numoct[i] = num % 8;
-		num /= 8;
-		i++;
-	}
-	while (x <= i)
-	{
-		ft_putchar_fd(numoct[x] + '0', fd);
-		x++;
-	}
-	return (0);
-}
-
 int ft_printf (char const *str,...)
 {
 	int		i;
@@ -234,11 +310,13 @@ int ft_printf (char const *str,...)
 	char	*string;
 	int		num;
 	va_list	ap;
+	int lenght;
 
 	i = 0;
 	value_arg = 0;
 	va_start (ap, str);
 	i = 0;
+	lenght = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
@@ -263,7 +341,8 @@ int ft_printf (char const *str,...)
 			else if (str[i + 1] == 'i')
 			{
 				num = va_arg (ap, int);
-				ft_putnbr_fd(num, 1);
+				//printf("\nInteger number: %i\n", num);
+				ft_itoa_oh(num, 10);
 				i++;
 			}
 			else
@@ -279,7 +358,7 @@ int ft_printf (char const *str,...)
 		i++;
 	}
 	va_end (ap);
-	return i;
+	return lenght;
 }
 
 int
@@ -291,7 +370,7 @@ main (void)
 
 	prtc = 'X';
 	prts = "hola";
-	prti = 5546;
-	printf ("\n%d\n", ft_printf ("0123456789%%, %%, %c, %s, %i, %.", prtc, prts, prti, 0));
+	prti = 5;
+	ft_printf ("Integer number result: %i", 5);
 	return 0;
 }
