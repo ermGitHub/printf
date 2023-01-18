@@ -105,7 +105,6 @@ int	ft_itoa_oh(int n, int base)
 	int			size;
 	char		*itoa;
 	char		*string;
-	int			lenght;
 	int			i;
 	long int	nbr;
 
@@ -125,9 +124,9 @@ int	ft_itoa_oh(int n, int base)
 			size++;
 		}
 		string = (ft_create_malloc(itoa, neg, nbr, size, base));
+		free (itoa);
 		ft_putstr_fd(string, 1);
-		lenght = ft_strlen(string);
-		return (lenght);
+		return (ft_strlen(string));
 	}
 	else
 		return (0);
@@ -135,11 +134,6 @@ int	ft_itoa_oh(int n, int base)
 
 int main (void)
 {
-	int	num_dec;
-	int	base;
-
-	num_dec = 0;
-	base = 10;
-	printf("\nLa longitud es: %i\n", ft_itoa_oh(num_dec, base));
+	printf("\nLa longitud es: %i\n", ft_itoa_oh(15, 16));
 	return (0);
 }
