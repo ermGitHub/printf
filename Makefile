@@ -6,7 +6,7 @@
 #    By: fxadmin <fxadmin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/11 17:57:02 by enramire          #+#    #+#              #
-#    Updated: 2023/02/28 08:44:39 by fxadmin          ###   ########.fr        #
+#    Updated: 2023/02/28 13:08:34 by fxadmin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,12 @@ AR				= ar
 NAME			= libftprintf.a
 
 SRCS			= ft_printf.c \
+				ft_putchar_fd.c \
+				ft_putstr_fd.c \
+				ft_putnbr_u_fd.c \
+				ft_putnbr_xx_fd.c \
+				ft_putnbr_fd.c \
+				ft_putptr_x_fd.c \
 
 OBJS			= $(SRCS:.c=.o)
 
