@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fxadmin <fxadmin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 12:12:38 by enramire          #+#    #+#             */
-/*   Updated: 2023/02/28 13:34:24 by fxadmin          ###   ########.fr       */
+/*   Created: 2023/02/28 13:20:01 by fxadmin           #+#    #+#             */
+/*   Updated: 2023/02/28 14:26:56 by fxadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar_fd(char c, int *ret)
+size_t	ft_strlen(const char *s)
 {
-	int	sum;
+	sizet	i;
 
-	sum = 0;
-	sum = *ret;
-	ft_write_test(write(1, &c, 1), ft_strlen(&c), ret);
-	if (*ret == -1)
-		return ;
-	sum++;
-	*ret = sum;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }
