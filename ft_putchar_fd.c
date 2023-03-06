@@ -24,3 +24,34 @@ void	ft_putchar_fd(char c, int *ret)
 	sum++;
 	*ret = sum;
 }
+
+/*
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kaneda <kaneda@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/18 12:12:38 by enramire          #+#    #+#             */
+/*   Updated: 2023/03/06 10:10:17 by kaneda           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+
+int	ft_putchar_fd(char c, int fd)
+{
+	int	expected_len;
+	int	bytes_written;
+
+	expected_len = 0;
+	bytes_written = 0;
+	expected_len = ft_strlen(c);
+	bytes_written = write(fd, &c, expected_len);
+	if (bytes_written == expected_len)
+		return (expected_len);
+	else
+		return (-1);
+}
+*/
