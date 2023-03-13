@@ -6,7 +6,7 @@
 #    By: fxadmin <fxadmin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/11 17:57:02 by enramire          #+#    #+#              #
-#    Updated: 2023/02/28 13:30:45 by fxadmin          ###   ########.fr        #
+#    Updated: 2023/03/06 10:31:17 by fxadmin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ SRCS			= ft_printf.c \
 				ft_putnbr_xx_fd.c \
 				ft_putnbr_fd.c \
 				ft_putptr_x_fd.c \
-				ft_write_test.c \
 				ft_strlen.c \
 
 OBJS			= $(SRCS:.c=.o)

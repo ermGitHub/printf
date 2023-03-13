@@ -6,15 +6,15 @@
 /*   By: fxadmin <fxadmin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:20:01 by fxadmin           #+#    #+#             */
-/*   Updated: 2023/02/28 14:26:56 by fxadmin          ###   ########.fr       */
+/*   Updated: 2023/03/06 10:44:11 by fxadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	sizet	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] != '\0')
