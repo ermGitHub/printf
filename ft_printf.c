@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fxadmin <fxadmin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: enramire <enramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 12:02:50 by enramire          #+#    #+#             */
-/*   Updated: 2023/03/01 09:04:25 by fxadmin          ###   ########.fr       */
+/*   Updated: 2023/03/15 07:07:35 by enramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	ft_printf(char const *str, ...)
 	va_start (ap, str);
 	i = 0;
 	ret = 0;
-	while (str[i] != '\0')
+	while (str[i])
 	{
-		if (str[i] == '%')
+		if (str[i] == '%' && str[i + 1])
 		{
 			ft_switch_case(&ap, str[i + 1], &i, &ret);
 			i++;
