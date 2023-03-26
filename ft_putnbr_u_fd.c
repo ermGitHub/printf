@@ -6,14 +6,15 @@
 /*   By: enramire <enramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 13:48:10 by enramire          #+#    #+#             */
-/*   Updated: 2023/03/18 17:53:42 by enramire         ###   ########.fr       */
+/*   Updated: 2023/03/26 14:42:47 by enramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 int	ft_putnbr_u_fd(unsigned int ui, int *ret)
-{	int	err;
+{	
+	int	err;
 
 	err = 0;
 	if (ui >= 10)
