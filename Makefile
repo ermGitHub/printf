@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fxadmin <fxadmin@student.42.fr>            +#+  +:+       +#+         #
+#    By: enramire <enramire@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/11 17:57:02 by enramire          #+#    #+#              #
-#    Updated: 2023/03/06 10:31:17 by fxadmin          ###   ########.fr        #
+#    Updated: 2023/03/26 16:59:57 by enramire         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,10 @@ SRCS			= ft_printf.c \
 				ft_strlen.c \
 
 OBJS			= $(SRCS:.c=.o)
-
 DEPS			= $(SRCS:.c=.d)
+
+%.o: 			%.c Makefile
+				$(CC) $(CFLAGS) -c $< -o $@
 
 all:			$(NAME)
 
