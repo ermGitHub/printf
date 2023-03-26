@@ -3,35 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fxadmin <fxadmin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: enramire <enramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 12:14:09 by enramire          #+#    #+#             */
-/*   Updated: 2023/02/28 12:39:49 by fxadmin          ###   ########.fr       */
+/*   Updated: 2023/03/18 17:50:56 by enramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putstr_fd(char *s, int *ret)
+int	ft_putstr_fd(char *s, int *ret)
 {
 	int	i;
-	int	sum;
+	int	res;
+	int	err;
 
+	res = 0;
 	i = 0;
-	sum = 0;
+	err = 0;
 	if (s != NULL)
 	{
 		while (s[i])
 		{
-			ft_putchar_fd(s[i], ret);
-			i++;
+			if (err != -1)
+			{
+				err = ft_putchar_fd(s[i], ret);
+				i++;
+			}
 		}
 	}
 	else
 	{
-		write (1, "(null)", 6);
-		sum = *ret + 6;
-		*ret = sum;
-		return ;
+		err = write (1, "(null)", 6);
+			*ret += 6;
 	}
+	return (err);
 }
