@@ -6,7 +6,7 @@
 /*   By: enramire <enramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 12:12:38 by enramire          #+#    #+#             */
-/*   Updated: 2023/03/18 17:40:44 by enramire         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:12:24 by enramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_putchar_fd(char c, int *ret)
 {
 	if (write(1, &c, 1) != 1)
 		return (-1);
-	*ret += 1;
+	else
+		*ret += 1;
 	return (0);
 }

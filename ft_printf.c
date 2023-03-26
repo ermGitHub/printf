@@ -6,7 +6,7 @@
 /*   By: enramire <enramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 12:02:50 by enramire          #+#    #+#             */
-/*   Updated: 2023/03/26 15:00:18 by enramire         ###   ########.fr       */
+/*   Updated: 2023/03/26 16:06:47 by enramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	ft_printf(char const *str, ...)
 	va_start (ap, str);
 	i = 0;
 	ret = 0;
+	err = 0;
 	while (str[i])
 	{
 		if (str[i] == '%' && str[i + 1])
@@ -53,10 +54,10 @@ int	ft_printf(char const *str, ...)
 		}
 		else
 			err = ft_putchar_fd(str[i], &ret);
+		if (err == -1)
+			return (err);
 		i++;
 	}
-	if (err == -1)
-		ret = err;
 	va_end (ap);
 	return (ret);
 }

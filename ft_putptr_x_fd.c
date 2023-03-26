@@ -6,7 +6,7 @@
 /*   By: enramire <enramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 13:47:59 by enramire          #+#    #+#             */
-/*   Updated: 2023/03/18 17:55:18 by enramire         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:55:34 by enramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	ft_putptr_x_fd(unsigned long long int n, int *ret, int first)
 	if (first == 0)
 	{
 		err = ft_putstr_fd("0x", ret);
+		if (err == -1)
+			return (err);
 		first = 1;
 	}
 	if (n == 0)
@@ -30,7 +32,11 @@ int	ft_putptr_x_fd(unsigned long long int n, int *ret, int first)
 		return (err);
 	}
 	if (n > 15)
-		ft_putptr_x_fd((n / 16), ret, first);
+	{
+		err = ft_putptr_x_fd((n / 16), ret, first);
+		if (err == -1)
+			return (err);
+	}
 	err = ft_putchar_fd(hex[n % 16], ret);
 	return (err);
 }
