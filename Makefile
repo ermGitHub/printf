@@ -6,7 +6,7 @@
 #    By: enramire <enramire@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/11 17:57:02 by enramire          #+#    #+#              #
-#    Updated: 2023/03/26 16:59:57 by enramire         ###   ########.fr        #
+#    Updated: 2023/03/26 18:31:37 by enramire         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ SRCS			= ft_printf.c \
 				ft_putnbr_xx_fd.c \
 				ft_putnbr_fd.c \
 				ft_putptr_x_fd.c \
-				ft_strlen.c \
 
 OBJS			= $(SRCS:.c=.o)
 DEPS			= $(SRCS:.c=.d)
